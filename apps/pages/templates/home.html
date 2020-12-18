@@ -1,0 +1,558 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+
+
+	<section id="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-6">
+									<h1><span>DhakaWorker</span>.Com</h1>
+									<h2>Top Class Elecrician</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<button type="button" class="btn btn-default get">Know More</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="{% static 'images/home/slide1 (2).jpg' %}" class="girl img-responsive" alt="" />
+
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-6">
+									<h1><span>DhakaWorker</span>.Com</h1>
+									<h2>Trusted Home Maid</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<button type="button" class="btn btn-default get">Know More</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="{% static 'images/home/slide2.jpg' %}" class="girl img-responsive" alt="" />
+
+								</div>
+							</div>
+
+							<div class="item">
+								<div class="col-sm-6">
+									<h1><span>DhakaWorker</span>.Com</h1>
+									<h2>Top Rated Driver</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<button type="button" class="btn btn-default get">Know More</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="{% static 'images/home/slide3.jpg' %}" class="girl img-responsive" alt="" />
+
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-6">
+
+									<h1><span>DhakaWorker</span>.Com</h1>
+									<h2>Top Security Guard</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<button type="button" class="btn btn-default get">Know More</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="{% static 'images/home/slide4.jpg' %}" class="girl img-responsive" alt="" />
+
+								</div>
+							</div>
+						</div>
+
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Area</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							{% for area in area_list %}
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+
+											{{ area.name }}
+										</a>
+									</h4>
+								</div>
+							</div>
+					 		{% endfor %}
+
+						</div><!--/category-products-->
+
+						<div class="brands_products"><!--brands_products-->
+							<h2>Number Of Registared Workers </h2>
+							<div class="brands-name">
+								<ul class="nav nav-pills nav-stacked">
+<!--									<li><a href="#"> <span class="pull-right">(50)</span>Maid Servant </a></li>-->
+									{% for category in category_list%}
+									<li><a href="#"> <span class="pull-right">({{category.workerprofile_set.all.count}})</span>{{category.name}}</a></li>
+
+									{% endfor %}
+								</ul>
+							</div>
+						</div><!--/brands_products-->
+
+
+
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/ELECTRICIAN.png' %}" style="height:270px;width:250px;margin-bottom:20px; "alt="" />
+						</div><!--/shipping-->
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/DRIVER.png' %}"style="height:270px;width:250px;margin-bottom:20px;" alt="" />
+						</div><!--/shipping-->
+
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--Top Worker-->
+						<h2 class="title text-center">Top Worker</h2>
+			 {% for object in object_list %}
+					<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+										<div class="productinfo text-center">
+											<img src="{{object.image.url}}" alt="" />
+											<h2> {{object.fullname}} </h2>
+											<p>{{object.category.name}}</p>
+											{% for area in object.working_area.all %}
+											<a href="#" class=" btn btn-sm add-to-cart"></i>{{area.name}}</a>
+											{% endfor %}
+										</div>
+										<div class="product-overlay">
+											<div class="overlay-content">
+												<h2>120 TK / Hour</h2>
+												<p>Top Hired Worker</p>
+												<a href="details.html" class="btn btn-default add-to-cart"></i>Contact & Hire</a>
+											</div>
+										</div>
+								</div>
+
+							</div>
+						</div>
+			{% endfor %}
+
+					</div><!--Top Worker End-->
+
+
+					<div class="category-tab"><!--category-menu-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#tshirt" data-toggle="tab">Maid Servant </a></li>
+								<li><a href="#blazers" data-toggle="tab">Security Guard</a></li>
+								<li><a href="#sunglass" data-toggle="tab">Driver</a></li>
+								<li><a href="#kids" data-toggle="tab">Electrician</a></li>
+
+							</ul>
+						</div>
+						<!--category-menu end-->
+						<!--/category-tab-->
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="tshirt" >
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Rasheda Begum</h2>
+												<p>Home Maid / Mohakhali</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="images/home/maid1.jpg" alt="" />
+												<h2> Rabeya Khatun</h2>
+												<p>Home Maid / Mirpur 1</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Rotna Khatun</h2>
+												<p>Home Maid / Dhanmondi 32</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Rani Begum</h2>
+												<p>Home Maid / Jattara Bari</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="blazers" >
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Rakib Hossain</h2>
+												<p>Security Guard / Jattara Bari</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="images/home/security1.png" alt="" />
+												<h2> Rakib Hossain</h2>
+												<p>Security Guard / Jattara Bari</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Rakib Hossain</h2>
+												<p>Security Guard / Jattara Bari</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Rakib Hossain</h2>
+												<p>Security Guard / Jattara Bari</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="sunglass" >
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Rashedul Alam</h2>
+												<p>Driver / Uttora</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Shuvo Habib</h2>
+												<p>Driver / Mirpur 10</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Razin Ali</h2>
+												<p>Driver / Gulshan</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Robiul Islam</h2>
+												<p>Driver / Motizil</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="kids" >
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Mohmmad Rofiq</h2>
+												<p>Elecrician / Mirpur 11</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Rofiq Mohmmad </h2>
+												<p>Elecrician / Dhanmondi 27</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Shehabul Islam </h2>
+												<p>Elecrician / Dhanmondi 7</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+												<h2> Abdul Rahman  </h2>
+												<p>Elecrician / Farmgate</p>
+
+												<a href="#" class="btn btn-default add-to-cart">Details</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!--/category-tab-->
+
+					<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">Choose Your Worker</h2>
+
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+											<img src="{% static 'images/home/security1.png' %}" alt="" />
+													<h2>Worker Name</h2>
+													<p>Worker Category & Location</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>
+						</div>
+					</div><!--/recommended_items-->
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock body %}

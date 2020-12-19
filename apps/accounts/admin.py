@@ -6,7 +6,7 @@ from apps.accounts.models import WorkerProfile, Message, WorkerCategory, Working
 
 @admin.register(WorkerCategory)
 class WorkerCategoryAdmin(admin.ModelAdmin):
-    list_display = ['name',]\
+    list_display = ['name',]
 
 @admin.register(WorkingArea)
 class WorkerAreaAdmin(admin.ModelAdmin):

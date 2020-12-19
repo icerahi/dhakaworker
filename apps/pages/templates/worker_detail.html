@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<div class="shipping text-center"><!--shipping-->
+
+							<img src="{% static 'images/home/DRIVER.png' %}"style="height:270px;width:250px;margin-bottom:20px;" alt="" />
+						</div><!--/shipping-->
+
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/ELECTRICIAN.png' %}" style="height:270px;width:250px;margin-bottom:20px; "alt="" />
+						</div><!--/shipping-->
+
+
+
+
+
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src="{{object.image.url}}"style="height:200px;width:200px;margin-left:50px;margin-top:70px;" alt="" />
+
+							</div>
+							<div id="similar-product" class="carousel slide" data-ride="carousel">
+
+
+
+
+							</div>
+
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+
+								<h2>{{object.fullname}}</h2>
+								<p>{{object.category.name}} / {% for area in object.working_area.all %} {{area.name}}, {% endfor %}</p>
+
+								<p>{{object.views}} times view</p>
+								<div class="price">
+								<h2>{{ object.hourly_rate}} TK / Hour</h2>
+								</div>
+								<p><b>Working Availability:</b> {{ object.working_time }} </p>
+								<p><b>Extra Service:</b> {{object.extra_service}} </p>
+								<p><b>Experience:</b> {{ object.experience }} years</p>
+
+								<button type="button" class="btn btn-fefault cart">
+
+										Click For Hire
+									</button>
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+
+
+
+					<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">recommended Worker</h2>
+
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								{% for worker in recommend_worker %}
+								<div class="item active">
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="{{ worker.image.url }}" alt="" />
+													<h2>{{worker.fullname}}</h2>
+													<p>{{worker.category.name}}</p>
+													<p>{% for area in worker.working_area.all %} {{area.name}}, {% endfor %}</p>
+													<a href="#" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+								</div>
+								{% empty %}
+								<p class="text-center"> NO RECOMMEND WORKER</p>
+								{% endfor %}
+
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>
+						</div>
+					</div><!--/recommended_items-->
+
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock body %}

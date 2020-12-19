@@ -9,6 +9,7 @@ from django.dispatch import receiver
 
 class WorkerCategory(models.Model):
     name = models.CharField(max_length=50)
+
     def __str__(self):
         return self.name
 
@@ -17,6 +18,7 @@ class WorkingArea(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class WorkerProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='worker_profile')

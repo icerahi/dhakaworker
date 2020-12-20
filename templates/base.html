@@ -63,8 +63,8 @@
 				</div>
 						<div class=".col-sm-8">
 				<div class="logo pull-left"style="margin-left:110px;height:40px;width:700px;margin-top:25px;">
-							<form class="example" action="">
-  <input type="text" placeholder="Find Your Worker.." name="search">
+							<form class="example" action="{% url 'search_view' %}">
+  <input type="text" placeholder="Find Your Worker.." name="search" value="{{request.GET.search}}">
   <button type="submit"><i class="fa fa-search"></i></button>
 </form>
 						</div>
@@ -100,7 +100,7 @@
 								<li class="dropdown"><a href="#">Worker Category<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
 										{% for category in category_list %}
-                                        <li><a href="#"> {{ category.name }} </a></li>
+                                        <li><a href="{% url 'category_filter' slug=category.slug %}"> {{ category.name }} </a></li>
 
 										{% endfor %}
 									 

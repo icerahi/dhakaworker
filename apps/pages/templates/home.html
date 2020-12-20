@@ -94,7 +94,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+										<a href="{% url 'area_filter' slug=area.name %}" >
 
 											{{ area.name }}
 										</a>
@@ -111,7 +111,7 @@
 								<ul class="nav nav-pills nav-stacked">
 <!--									<li><a href="#"> <span class="pull-right">(50)</span>Maid Servant </a></li>-->
 									{% for category in category_list%}
-									<li><a href="#"> <span class="pull-right">({{category.workerprofile_set.all.count}})</span>{{category.name}}</a></li>
+									<li><a href="{% url 'category_filter' slug=category.slug %}"> <span class="pull-right">({{category.workerprofile_set.all.count}})</span>{{category.name}}</a></li>
 
 									{% endfor %}
 								</ul>

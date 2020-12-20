@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/MAID-SERVANT.png' %}" style="height:270px;width:250px;margin-bottom:20px;"alt="#" />
+						</div><!--/shipping-->
+
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/SECURITY-GUARD.png' %}"style="height:270px;width:250px;margin-bottom:20px;" alt="" />
+						</div><!--/shipping-->
+
+
+
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/ELECTRICIAN.png' %}" style="height:270px;width:250px;margin-bottom:20px; "alt="" />
+						</div><!--/shipping-->
+
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{% static 'images/home/DRIVER.png' %}"style="height:270px;width:250px;margin-bottom:20px;" alt="" />
+						</div><!--/shipping-->
+
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						{% with request.resolver_match.url_name as url_name %}
+						{% if url_name == "search_view" %}
+								<h2 class="title text-center">Result For "{{ request.GET.search }}"</h2>
+						{% endif %}
+
+						<h2 class="title text-center">{{ request.resolver_match.kwargs.slug }}</h2>
+						{% endwith %}
+
+                        {% for object in object_list %}
+						<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="{{ object.image.url }}" alt="" />
+													<h2>{{ object.fullname }}</h2>
+													<p>{{ object.category.name}}</p>
+													<p>{% for area in object.working_area.all %} {{ area }} {% endfor %}</p>
+													<a href="{% url 'worker_detail' pk=object.pk %}" class="btn btn-default add-to-cart">View Details </a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								{% empty %}
+								<p class="text-center"> NO WORKER FOUND !</p>
+                        {% endfor %}
+
+
+<!--						<ul class="pagination">-->
+<!--							<li class="active"><a href="">1</a></li>-->
+<!--							<li><a href="">2</a></li>-->
+<!--							<li><a href="">3</a></li>-->
+<!--							<li><a href="">&raquo;</a></li>-->
+<!--						</ul>-->
+					</div><!--features_items-->
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock body %}

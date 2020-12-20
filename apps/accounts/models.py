@@ -3,22 +3,31 @@ from django.db import models
 from PIL import Image
 
 # Create your models here.
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 
 class WorkerCategory(models.Model):
     name = models.CharField(max_length=50)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.name
+
+@receiver(pre_save,sender=WorkerCategory)
+def pre_save_category_slug(sender,instance,**kwargs):
+    instance.slug=slugify(instance.name)
+
 
 class WorkingArea(models.Model):
     name = models.CharField(max_length=20)
-
+    slug = models.SlugField()
     def __str__(self):
         return self.name
-
+@receiver(pre_save,sender=WorkingArea)
+def pre_save_area_slug(sender,instance,**kwargs):
+    instance.slug=slugify(instance.name)
 
 class WorkerProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='worker_profile')

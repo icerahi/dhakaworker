@@ -7,10 +7,12 @@ from apps.accounts.models import WorkerProfile, Message, WorkerCategory, Working
 @admin.register(WorkerCategory)
 class WorkerCategoryAdmin(admin.ModelAdmin):
     list_display = ['name',]
+    prepopulated_fields = {'slug':('name',),}
 
 @admin.register(WorkingArea)
 class WorkerAreaAdmin(admin.ModelAdmin):
     list_display = ['name',]
+    prepopulated_fields = {'slug': ('name',), }
 
 @admin.register(WorkerProfile)
 class WorkerProfileAdmin(admin.ModelAdmin):

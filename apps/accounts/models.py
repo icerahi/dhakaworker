@@ -29,6 +29,15 @@ class WorkingArea(models.Model):
 def pre_save_area_slug(sender,instance,**kwargs):
     instance.slug=slugify(instance.name)
 
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset().filter(status=True)
+
+# class AllObjectManager(models.Manager):
+#     def get_queryset(self):
+#         return super(AllObjectManager, self).get_queryset()
+
 class WorkerProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='worker_profile')
     fullname = models.CharField(max_length=40,null=True,blank=True)
@@ -44,11 +53,24 @@ class WorkerProfile(models.Model):
 
     created    = models.DateTimeField(auto_now_add=True)
 
+    status = models.BooleanField(default=False)
+
+    objects = PublishedManager()
+
+
+
     def __str__(self):
         return self.user.username
 
     class Meta:
         ordering = ['-views']
+
+
+@receiver(pre_save, sender=WorkerProfile)
+def check_status_of_profile(instance, *args, **kwargs):
+    if (instance.fullname is not None and instance.category is not None and instance.working_time is not None
+        and instance.hourly_rate is not None and instance.phone is not None):
+        instance.status = True
 
 
 class Message(models.Model):

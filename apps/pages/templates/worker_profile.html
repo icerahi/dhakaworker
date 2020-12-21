@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Dashboard</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+											<div class="dashimg">
+                                                Profile Views : {{object.worker_profile.views}} times
+											</div>
+										</a>
+									</h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading"style="font-style:bold;border:1px solid green;hob">
+									<h4 class="panel-title"style="margin-left:70px;">
+										<a  href="{% url 'profile_view' object.username%}">
+											Profile Details
+										</a>
+									</h4>
+								</div>
+							</div>
+
+							<div class="panel panel-default">
+								<div class="panel-heading"style="font-style:italic;border:1px solid green;">
+									<h4 class="panel-title"style="margin-left:80px;"><a href="#">Messages</a></h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading"style="font-style:italic;border:1px solid green;">
+									<h4 class="panel-title"style="margin-left:80px;"><a href="{% url 'logout' %}">Logout</a></h4>
+								</div>
+							</div>
+						</div><!--/category-products-->
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--Top Worker-->
+					<div class="profile-details" style="margin-bottom:20px;">
+
+					<img src="{{object.worker_profile.image.url}}"style="height:100px;width:100px;border-radius:50%;margin-left:380px;"/>
+					<h3 style="text-align:center;">{{ object.worker_profile.fullname}}({{ object.username }})</h3>
+                        <p class="text-center">Email : <strong>{{object.email}}</strong></p>
+                        <p class="text-center">Contact No : <strong>{{object.worker_profile.phone}}</strong></p>
+					<p style="margin-left:43%;border:1px solid gold;width:15%;text-align:center;background-color:gray;color:white;">{{object.worker_profile.category.name}}</p>
+					 <h3>#<a  href="{% url 'profile_edit_view' request.user.username %}" class="text-center"> <strong>Edit </strong></a></h3>
+
+					<h4 style="margin-left:20px;margin-top:20px;">My work Responsibilities:</h4>
+					<p style="margin-left:20px;margin-top:20px;"> {{ object.worker_profile.extra_service}}</p>
+					<h4 style="margin-left:20px;margin-top:20px;">Working Time:</h4>
+					<p style="margin-left:20px;margin-top:10px;">{{ object.worker_profile.working_time}}</p>
+					<h4 style="margin-left:20px;margin-top:20px;">Working Area:</h4>
+					<p style="margin-left:20px;margin-top:10px;">{% for area in object.worker_profile.working_area.all %}{{area.name}}|{% endfor %}</p>
+ 					<h4 style="margin-left:20px;margin-top:20px;display:inline;">My Hourly Rate:</h4>
+					<p style="margin-left:20px;margin-top:20px;display:inline;"> {{ object.worker_profile.hourly_rate}} Taka</p>
+
+
+                    </div>
+					</div><!--Top Worker End-->
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock body %}

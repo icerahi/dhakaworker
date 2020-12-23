@@ -1,3 +1,4 @@
+
 from django.contrib.auth.models import User
 from django.db import models
 from PIL import Image
@@ -15,6 +16,9 @@ class WorkerCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = " Category (admin work)"
+
 @receiver(pre_save,sender=WorkerCategory)
 def pre_save_category_slug(sender,instance,**kwargs):
     instance.slug=slugify(instance.name)
@@ -25,15 +29,19 @@ class WorkingArea(models.Model):
     slug = models.SlugField()
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = " Area (admin work)"
+
 @receiver(pre_save,sender=WorkingArea)
 def pre_save_area_slug(sender,instance,**kwargs):
     instance.slug=slugify(instance.name)
 
 
-class PublishedManager(models.Manager):
-    def get_queryset(self):
-        return super(PublishedManager, self).get_queryset().filter(status=True)
-
+# class PublishedManager(models.Manager):
+#     def get_queryset(self):
+#         return super(PublishedManager, self).get_queryset().filter(status=True)
+#
 # class AllObjectManager(models.Manager):
 #     def get_queryset(self):
 #         return super(AllObjectManager, self).get_queryset()
@@ -55,8 +63,8 @@ class WorkerProfile(models.Model):
 
     status = models.BooleanField(default=False)
 
-    objects = PublishedManager()
-
+    # published = PublishedManager()
+    # objects   = AllObjectManager()
 
 
     def __str__(self):
@@ -66,12 +74,16 @@ class WorkerProfile(models.Model):
         ordering = ['-views']
 
 
+        verbose_name_plural = "Worker Profiles"
+
+
 @receiver(pre_save, sender=WorkerProfile)
 def check_status_of_profile(instance, *args, **kwargs):
     if (instance.fullname is not None and instance.category is not None and instance.working_time is not None
         and instance.hourly_rate is not None and instance.phone is not None):
         instance.status = True
-
+    else:
+        instance.status = False
 
 class Message(models.Model):
     worker = models.ForeignKey(WorkerProfile,on_delete=models.CASCADE,related_name='worker_message')
@@ -80,6 +92,10 @@ class Message(models.Model):
     phone = models.IntegerField()
     message=models.TextField(blank=False,null=False)
     time =models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering= ['-time']
+        verbose_name_plural="Messages"
 
 
 # when user create also create a profile

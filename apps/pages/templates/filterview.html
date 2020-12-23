@@ -46,7 +46,7 @@
 											<div class="single-products">
 												<div class="productinfo text-center">
 													<img src="{{ object.image.url }}" alt="" />
-													<h2>{{ object.fullname }}</h2>
+													<h2>{{ object.user.username }}({{object.fullname}})</h2>
 													<p>{{ object.category.name}}</p>
 													<p>{% for area in object.working_area.all %} {{ area }} {% endfor %}</p>
 													<a href="{% url 'worker_detail' pk=object.pk %}" class="btn btn-default add-to-cart">View Details </a>

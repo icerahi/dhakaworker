@@ -17,9 +17,10 @@ class WorkerAreaAdmin(admin.ModelAdmin):
 @admin.register(WorkerProfile)
 class WorkerProfileAdmin(admin.ModelAdmin):
     list_display = ['user','category','working_time','hourly_rate','extra_service','experience','phone',
-                    'views','created']
+                    'views','created','status']
+    list_editable = ('status',)
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['worker','name','email','phone','message','time',]
 

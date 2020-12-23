@@ -21,9 +21,14 @@ class HomeWorkerListView(ListView):
     model = WorkerProfile
     template_name = 'home.html'
 
+    def get_queryset(self):
+        return super(HomeWorkerListView, self).get_queryset().filter(status=True)
+
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(HomeWorkerListView, self).get_context_data(**kwargs)
+      #  context['object_list']=WorkerProfile.published.all()
+
         context['area_list']=WorkingArea.objects.all()
         context['category_list']=WorkerCategory.objects.all()
         return context
@@ -47,7 +52,7 @@ def worker_details(request,pk):
         worker.views +=1
         worker.save()
 
-    recommend_worker = WorkerProfile.objects.filter(category=worker.category).exclude(pk=pk)
+    recommend_worker = WorkerProfile.objects.filter(category=worker.category,status=True).exclude(pk=pk)
 
     context={
         'object':worker,
@@ -159,6 +164,7 @@ def sign_in_up(request):
         signin_form = CustomLoginForm(request.POST)
         if signup_form.is_valid():
             user = signup_form.save(commit=True)
+            user.save()
             login(request,user)
             messages.success(request,f"Welcome {request.user.username} ! you have logged in successfully !")
             return redirect('home')

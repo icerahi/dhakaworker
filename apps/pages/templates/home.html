@@ -140,7 +140,7 @@
 								<div class="single-products">
 										<div class="productinfo text-center">
 											<img src="{{object.image.url}}" alt="" />
-											<h2> {{object.fullname}} </h2>
+											 <h2>{{ object.user.username }}({{object.fullname}})</h2>
 											<p>{{object.category.name}}</p>
 											{% for area in object.working_area.all %}
 											<a href="#" class=" btn btn-sm add-to-cart"></i>{{area.name}}</a>

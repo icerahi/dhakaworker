@@ -38,7 +38,7 @@ class ProfileForm(ModelForm):
         self.fields['image'].widget.attrs.update({'class':'form-control',
                                              'placeholder':'image'})
         self.fields['fullname'].widget.attrs.update({'class':'form-control',
-                                            'placeholder':'category'}),
+                                            'placeholder':'fullname'}),
         self.fields['working_time'].widget.attrs.update({'class':'form-control',
                                                'placeholder':'working_time'}),
         self.fields['hourly_rate'].widget.attrs.update({'class' :'form-control',

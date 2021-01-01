@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from apps.accounts.models import WorkerProfile
+from apps.accounts.models import WorkerProfile, Message
 
 
 class CustomLoginForm(forms.Form):
@@ -52,3 +52,20 @@ class ProfileForm(ModelForm):
                                                      'placeholder': 'experience'})
         self.fields['phone'].widget.attrs.update({'class': 'form-control',
                                                      'placeholder': 'phone'})
+
+
+class MessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = ("name","email","phone","message")
+
+    def __init__(self,*args,**kwargs):
+        super(MessageForm, self).__init__(*args,**kwargs)
+        self.fields['name'].widget.attrs.update({'class':'form-control',
+                                             'placeholder':'Your Name'})
+        self.fields['email'].widget.attrs.update({'class':'form-control',
+                                            'placeholder':'Your Email'}),
+        self.fields['phone'].widget.attrs.update({'class':'form-control',
+                                               'placeholder':'Your Phone'}),
+        self.fields['message'].widget.attrs.update({'class' :'form-control',
+                                               'placeholder':'Your Message'})

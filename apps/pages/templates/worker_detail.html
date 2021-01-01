@@ -4,6 +4,8 @@
 
 {% block body %}
 
+
+
 	<section>
 		<div class="container">
 			<div class="row">
@@ -54,10 +56,11 @@
 								<p><b>Extra Service:</b> {{object.extra_service}} </p>
 								<p><b>Experience:</b> {{ object.experience }} years</p>
 
-								<button type="button" class="btn btn-fefault cart">
+								<button type="button" class="btn btn-fefault cart"  data-toggle="modal" data-target="#message_modal">
 
 										Click For Hire
 									</button>
+
 
 							</div><!--/product-information-->
 						</div>
@@ -106,5 +109,11 @@
 			</div>
 		</div>
 	</section>
+
+
+
+
+
+{% include 'message_modal.html' %}
 
 {% endblock body %}

@@ -46,12 +46,57 @@
 					</div>
 				</div>
 
-                {% for object in object_list %}
-                <p>{{object.name}}</p>
-                {% endfor %}
+<!--                {% for object in object_list %}-->
+<!--                <p>{{object.name}}</p>-->
+<!--                {% endfor %}-->
+<div class="col-md-9">
+<p class="lead text-center"> Messages From Interested Client</p>
+	<hr>
+				<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Client Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Message</th>
+      <th scope="col">Time</th>
+      <th scope="col">Action</th>
 
+    </tr>
+  </thead>
+  <tbody>
+  {% for object in object_list %}
+    <tr>
+      <th scope="row">{{object.name}}</th>
+      <td>{{object.phone}}</td>
+      <td>{{object.email}}</td>
+      <td>{{object.message}}</td>
+      <td>{{object.time}}</td>
+      <td ><button  type="button" class="btn btn-danger" onclick="myFunction() ">Delete</button></td>
+    </tr>
+
+<!--  delete confirm dialogue-->
+  <script>
+function myFunction() {
+  var txt;
+  if (confirm("Do you want to delete!")) {
+   window.location.href = "{% url 'message_delete' pk=object.pk %}";
+  } else {
+  //don't do anything
+  }
+
+}
+</script>
+  {% endfor %}
+
+  </tbody>
+</table>
+</div>
 			</div>
 		</div>
 	</section>
+
+
+
 
 {% endblock body %}

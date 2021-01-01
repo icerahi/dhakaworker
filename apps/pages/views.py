@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 from django.views.generic import FormView
 
-from apps.accounts.forms import RegisterForm, CustomLoginForm, ProfileForm
+from apps.accounts.forms import RegisterForm, CustomLoginForm, ProfileForm, MessageForm
 # Create your views here.
 from django.views.generic import ListView, DetailView
 
@@ -40,6 +40,20 @@ def worker_details(request,pk):
     worker = get_object_or_404(WorkerProfile,id=pk)
 
     viewed = request.session.get('viewed',[])
+
+    ##getting message form client
+    if request.method == "POST":
+        form = MessageForm(request.POST or None)
+        if form.is_valid():
+            form.save(commit=False)
+            form.instance.worker=worker
+            form.save(commit=True)
+            messages.success(request,f"Your Messege sent to Worker successfully !")
+
+            return redirect("worker_detail",pk=worker.pk)
+    else:
+        form = MessageForm()
+
     if viewed:
         if worker.id not in viewed:
             viewed.append(worker.id)
@@ -58,6 +72,7 @@ def worker_details(request,pk):
         'object':worker,
         'recommend_worker':recommend_worker,
         'category_list':WorkerCategory.objects.all(),
+        'form':form,
     }
     return render(request,'worker_detail.html',context)
 
@@ -134,7 +149,9 @@ class MessageListView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         return super(MessageListView, self).get_queryset().filter(worker__user=self.request.user)
 
-
+def message_delete(request,pk):
+    message = Message.objects.get(pk=pk).delete()
+    return redirect('messages',username=request.user.username)
 
 @login_required(login_url="sign_in_up")
 def profile_edit(request,username):

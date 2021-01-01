@@ -14,4 +14,5 @@ urlpatterns = [
     path('<username>/',views.ProfileView.as_view(),name='profile_view'),
     path('edit/<username>',views.profile_edit,name='profile_edit_view'),
     path('messages/<username>',views.MessageListView.as_view(),name="messages"),
+    path('message/delete/<pk>',views.message_delete,name='message_delete'),
 ]

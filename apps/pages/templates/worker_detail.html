@@ -45,7 +45,7 @@
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
 
-								 <h2>{{ object.user.username }}({{object.fullname}})</h2>
+								 <h2>{{object.fullname}}</h2>
 								<p>{{object.category.name}} / {% for area in object.working_area.all %} {{area.name}}, {% endfor %}</p>
 
 								<p>{{object.views}} times view</p>
@@ -80,7 +80,7 @@
 											<div class="single-products">
 												<div class="productinfo text-center">
 													<img src="{{ worker.image.url }}" alt="" />
-													<h2>{{ worker.user.username }}({{worker.fullname}})</h2>
+													<h2>{{worker.fullname}}</h2>
 													<p>{{worker.category.name}}</p>
 													<p>{% for area in worker.working_area.all %} {{area.name}}, {% endfor %}</p>
 													<a href="{% url 'worker_detail' worker.id %}" class="btn btn-default add-to-cart">View Details </a>

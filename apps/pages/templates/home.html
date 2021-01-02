@@ -130,17 +130,17 @@
 					</div>
 				</div>
 
-				<div class="col-sm-9 padding-right">
+				<div class="col-sm-9 col-mb-9 col-lg-9 padding-right">
 					<div class="features_items"><!--Top Worker-->
 						<h2 class="title text-center">Top Worker</h2>
-
+				<div class="row">
 			 {% for object in object_list %}
-					<div class="col-sm-4">
+					<div class="col-sm-4 col-mb-4 col-lg-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
 											<img src="{{object.image.url}}" alt="" />
-											 <h2>{{ object.user.username }}({{object.fullname}})</h2>
+											 <h2>{{object.fullname}}</h2>
 											<p>{{object.category.name}}</p>
 											{% for area in object.working_area.all %}
 											<a href="#" class=" btn btn-sm add-to-cart"></i>{{area.name}}</a>
@@ -158,6 +158,7 @@
 							</div>
 						</div>
 			{% endfor %}
+					</div>
 
 					</div><!--Top Worker End-->
 
